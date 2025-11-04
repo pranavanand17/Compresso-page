@@ -57,7 +57,7 @@
       color: #222;
     }
 
-    /* --- Download Button --- */
+    /* --- Buttons --- */
     .button {
       display: inline-block;
       padding: 15px 40px;
@@ -69,6 +69,7 @@
       position: relative;
       overflow: hidden;
       transition: color 0.3s ease;
+      margin-bottom: 15px;
     }
 
     .button::before {
@@ -89,6 +90,26 @@
 
     .button:hover::before {
       width: 100%;
+    }
+
+    /* --- Sublink Button --- */
+    .sub-button {
+      display: inline-block;
+      padding: 10px 25px;
+      border: 1.5px solid #000;
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+      font-size: 0.95em;
+      letter-spacing: 0.3px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .sub-button:hover {
+      background-color: #000;
+      color: #fff;
     }
 
     /* --- Footer --- */
@@ -142,6 +163,11 @@
 
     <a href="https://github.com/pranavanand17/Compresso-page/releases/download/v3.0.0/compresso_v1.3.exe" class="button">
       Download for Windows (.exe)
+    </a>
+    <br>
+
+    <a href="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10060/gs10060w64.exe" class="sub-button" target="_blank">
+      Download Ghostscript (Required)
     </a>
   </main>
 
