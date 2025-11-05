@@ -1,30 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <style>
-        body { font-family: sans-serif; display:flex; justify-content:center; align-items:center; height:100vh; background:#f5f5f5; }
-        .container { background:#fff; padding:2rem; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); width:300px; }
-        h2 { margin-bottom:1rem; text-align:center; }
-        input { width:100%; padding:.5rem; margin-bottom:.8rem; border:1px solid #ccc; border-radius:4px; }
-        button { width:100%; padding:.6rem; background:#333; color:#fff; border:none; border-radius:4px; cursor:pointer; }
-        button:hover { background:#555; }
-        .error { color:red; text-align:center; margin-bottom:.5rem; }
-        .link { text-align:center; margin-top:.5rem; font-size:.9rem; }
-    </style>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body { font-family: Arial; display:flex; justify-content:center; align-items:center; height:100vh; background:#f5f5f5; }
+    .container { background:#fff; padding:2rem; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); width:300px; }
+    h2 { text-align:center; margin-bottom:1rem; }
+    input { width:100%; padding:0.5rem; margin:0.5rem 0; border:1px solid #ccc; border-radius:4px; }
+    button { width:100%; padding:0.5rem; background:black; color:white; border:none; border-radius:4px; cursor:pointer; margin-top:0.5rem; }
+    button:hover { background:#333; }
+    .message { color:red; font-size:0.9rem; text-align:center; margin-top:0.5rem; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Login</h2>
-        <div id="error" class="error"></div>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button id="loginBtn">Login</button>
-        <div class="link"><a href="signup.html">Create account</a></div>
-    </div>
+  <div class="container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <div id="message" class="message"></div>
+  </div>
 
-    <script src="auth.js"></script>
+  <script>
+    const form = document.getElementById('loginForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      message.textContent = '';
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      const users = JSON.parse(localStorage.getItem('users') || '{}');
+
+      if(!users[username] || users[username].password !== password) {
+        message.textContent = 'Invalid username or password';
+        return;
+      }
+
+      localStorage.setItem('loggedInUser', username);
+      window.location.href = 'index.html';
+    });
+  </script>
 </body>
 </html>
 
