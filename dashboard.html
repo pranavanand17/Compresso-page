@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - PDFZap</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 60 60" fill="none">
+                        <rect x="10" y="10" width="40" height="40" rx="8" fill="#2563eb"/>
+                        <path d="M20 25h20M20 30h20M20 35h15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="45" cy="45" r="8" fill="#f59e0b"/>
+                        <path d="M45 41l-3 4 3 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h1>PDFZap</h1>
+                </div>
+                <div class="nav-actions">
+                    <span id="userGreeting" class="user-greeting"></span>
+                    <div class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+                        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </div>
+                    <button id="logoutBtn" class="btn btn-secondary">Log Out</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <section class="tools-section">
+                <div class="section-header">
+                    <h2>PDF Tools</h2>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon compress-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </div>
+                        <h3>Compress PDF</h3>
+                        <p>Reduce file size while maintaining quality</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('compressInput').click()">Choose Files</button>
+                        <input type="file" id="compressInput" accept=".pdf" multiple hidden>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-icon merge-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="12" y1="18" x2="12" y2="12"/>
+                                <line x1="9" y1="15" x2="15" y2="15"/>
+                            </svg>
+                        </div>
+                        <h3>Merge PDFs</h3>
+                        <p>Combine multiple PDFs into one file</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('mergeInput').click()">Choose Files</button>
+                        <input type="file" id="mergeInput" accept=".pdf" multiple hidden>
+                    </div>
+                </div>
+
+                <div id="previewSection" class="preview-section hidden">
+                    <div class="section-header">
+                        <h3>Smart Preview</h3>
+                        <button id="clearPreview" class="btn btn-secondary btn-sm">Clear</button>
+                    </div>
+                    <div id="previewGrid" class="preview-grid"></div>
+                    <div class="preview-actions">
+                        <div class="file-name-editor">
+                            <label for="outputFileName">Output File Name:</label>
+                            <div class="name-input-group">
+                                <input type="text" id="outputFileName" placeholder="Enter file name">
+                                <span class="file-extension">.pdf</span>
+                            </div>
+                        </div>
+                        <button id="processBtn" class="btn btn-primary btn-lg">Process Files</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="history-section">
+                <div class="section-header">
+                    <h2>History</h2>
+                    <button id="clearHistory" class="btn btn-secondary btn-sm">Clear All</button>
+                </div>
+                <div id="historyList" class="history-list">
+                    <div class="empty-state">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v4"/>
+                            <polyline points="17 3 17 8 22 8"/>
+                            <circle cx="17" cy="17" r="5"/>
+                            <path d="M17 14v6l3 2"/>
+                        </svg>
+                        <p>No history yet. Start processing PDFs!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="loader" class="loader hidden">
+            <div class="loader-content">
+                <div class="spinner"></div>
+                <p id="loaderText">Processing...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
